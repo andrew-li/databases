@@ -1,4 +1,8 @@
 var mysql = require('mysql');
+var memjs = require('memjs');
+
+exports.mc = memjs.Client.create('127.0.0.1:9999', {
+});
 
 // Create a database connection and export it from this file.
 // You will need to connect with the user "root", no password,
