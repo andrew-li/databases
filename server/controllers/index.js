@@ -2,6 +2,8 @@ var models = require('../models');
 var bluebird = require('bluebird');
 var http = require("http");
 var urlParser = require('url');
+var db = require('../db');
+
 
 var headers = {
   "access-control-allow-origin": "*",
@@ -17,25 +19,27 @@ var sendResponse = function(response, data, statusCode){
   response.end(JSON.stringify(data));
 };
 
-var collectData = function(request, callback){
-  var data = "";
-  request.on('data', function(chunk){
-    data += chunk;
-  });
-  request.on('end', function(){
-    callback(JSON.parse(data));
-  });
-};
+// var collectData = function(request, callback){
+//   var data = "";
+//   request.on('data', function(chunk){
+//     data += chunk;
+//   });
+//   request.on('end', function(){
+//     callback(JSON.parse(data));
+//   });
+// };
 
 module.exports = {
   messages: {
     get: function (req, res) {
-      console.log('get');
-      sendResponse(req, res);
+      models.messages.get(function(data) {
+        sendResponse(res, data);
+      });
     }, // a function which handles a get request for all messages
     post: function (req, res) {
-      console.log('post');
-      // sendResponse(res);
+
+      models.messages.post(req.body);
+      //sendResponse(res, );
     }
     // , // a function which handles posting a message to the database
     // options: function (req, res) {
