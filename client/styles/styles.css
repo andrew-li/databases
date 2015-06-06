@@ -5,7 +5,11 @@ body {
     font-family: arial, sans-serif;
 }
 
-#main    {
+.chat .friend {
+    color: blue;
+}
+
+#main {
     width: 500px;
     margin: auto;
     text-align: left;
@@ -65,7 +69,7 @@ form input[type=text] {
     background-color: #eee;
 }
 
-.chat .username {
+.username {
     font-weight: 800;
 }
 

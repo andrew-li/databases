@@ -5,7 +5,7 @@ $(function() {
   app = {
 //TODO: The current 'addFriend' function just adds the class 'friend'
 //to all messages sent by the user
-    server: 'http://127.0.0.1:3000/classes/messages',
+    server: 'http://127.0.0.1:3000/classes/messages/',
     username: 'anonymous',
     roomname: 'lobby',
     lastMessageId: 0,
@@ -60,10 +60,9 @@ $(function() {
         url: app.server,
         type: 'GET',
         contentType: 'application/json',
-        // data: { order: '-createdAt'},
+        data: { order: 'objectId'},
         success: function(data) {
           console.log('chatterbox: Messages fetched');
-
           // Don't bother if we have nothing to work with
           if (!data.results || !data.results.length) { return; }
 
@@ -113,7 +112,7 @@ $(function() {
       }
     },
     populateRooms: function(results) {
-      app.$roomSelect.html('<option value="__newRoom">New room...</option><option value="" selected>Lobby</option></select>');
+      app.$roomSelect.html('<option value="__newRoom">New room...</option><option value="" selected>lobby</option></select>');
 
       if (results) {
         var rooms = {};
@@ -155,7 +154,7 @@ $(function() {
 
         // Add the friend class
         if (app.friends[data.username] === true)
-          $username.addClass('friend');
+          $username.toggleClass('friend');
 
         var $message = $('<br><span/>');
         $message.text(data.text).appendTo($chat);
@@ -168,7 +167,7 @@ $(function() {
       var username = $(evt.currentTarget).attr('data-username');
 
       if (username !== undefined) {
-        console.log('chatterbox: Adding %s as a friend', username);
+        console.log('chatterbox: Toggling %s as a friend', username);
 
         // Store as a friend
         app.friends[username] = true;
@@ -176,7 +175,7 @@ $(function() {
         // Bold all previous messages
         // Escape the username in case it contains a quote
         var selector = '[data-username="'+username.replace(/"/g, '\\\"')+'"]';
-        var $usernames = $(selector).addClass('friend');
+        var $usernames = $(selector).toggleClass('friend');
       }
     },
     saveRoom: function(evt) {

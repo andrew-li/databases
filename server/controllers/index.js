@@ -19,16 +19,6 @@ var sendResponse = function(response, data, statusCode){
   response.end(JSON.stringify(data));
 };
 
-// var collectData = function(request, callback){
-//   var data = "";
-//   request.on('data', function(chunk){
-//     data += chunk;
-//   });
-//   request.on('end', function(){
-//     callback(JSON.parse(data));
-//   });
-// };
-
 module.exports = {
   messages: {
     get: function (req, res) {
@@ -37,14 +27,8 @@ module.exports = {
       });
     }, // a function which handles a get request for all messages
     post: function (req, res) {
-
       models.messages.post(req.body);
-      //sendResponse(res, );
-    }
-    // , // a function which handles posting a message to the database
-    // options: function (req, res) {
-    //   sendResponse(res);
-    // }
+    } // a function which handles posting a message to the database
   },
 
   users: {

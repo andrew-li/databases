@@ -10,13 +10,3 @@ exports.dbConnection = mysql.createConnection({
       database: "chat"
     });
 
-exports.dbConnection.connect();
-
-// exports.dbConnection.query('select * from messages', function(err, result, fields){
-//   if (err) throw err;
-//   else {
-//     console.log(result);
-//   }
-// });
-
-
